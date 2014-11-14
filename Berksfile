@@ -1,0 +1,10 @@
+source 'http://api.berkshelf.com'
+
+cookbook 'apt'
+cookbook 'build-essential'
+cookbook 'swap'
+cookbook 'user'
+cookbook 'nginx'
+cookbook 'postgresql', git: 'https://github.com/phlipper/chef-postgresql.git'
+cookbook 'rbenv'
+cookbook 'simple_iptables', '0.6.0'

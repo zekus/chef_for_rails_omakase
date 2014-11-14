@@ -1,0 +1,8 @@
+<%= @environment %>:
+  adapter: postgresql
+  encoding: unicode
+  database: your_app_<%= @environment %>
+  pool: 5
+  host: localhost
+  username: <%= @username %>
+  password: <%= @password %>

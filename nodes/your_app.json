@@ -1,0 +1,73 @@
+{
+  "user": {
+    "name": "deploy",
+    "password": "",
+    "group": "www-data",
+    "ssh_keys": []
+  },
+
+  "ruby_versions": [ "2.1.5" ],
+  "ruby_gems": [ "bundler", "ruby-shadow", "backup" ],
+
+  "nginx": {
+    "virtual_hosts": [
+      {
+        "app_name": "your_app_staging",
+        "local_port": 3001,
+        "server_names": [ "staging.your_app.com" ],
+        "root_folder": "/home/deploy/apps/your_app_staging",
+        "environment": "staging"
+      },
+      {
+        "app_name": "your_app_production",
+        "local_port": 3002,
+        "server_names": [ "your_app.com" ],
+        "root_folder": "/home/deploy/apps/your_app_production",
+        "environment": "production",
+        "ssl_certificate_bundle_path": "/etc/nginx/ssl/your_app-bundle.cer",
+        "ssl_certificate_key_path": "/etc/nginx/ssl/your_app.key"
+      }
+    ]
+  },
+
+  "postgresql": {
+    "users": [
+      {
+        "username": "deploy",
+        "password": "",
+        "superuser": false,
+        "createdb": false,
+        "login": true
+      }
+    ],
+    "databases": [
+      {
+        "name": "your_app_staging",
+        "owner": "deploy",
+        "template": "template0",
+        "encoding": "utf8",
+        "locale": "en_US.UTF8"
+      },
+      {
+        "name": "your_app_production",
+        "owner": "deploy",
+        "encoding": "utf8",
+        "template": "template0",
+        "locale": "en_US.UTF8"
+      }
+    ]
+  },
+
+  "run_list": [
+    "apt::default",
+    "build-essential::default",
+    "your_app::basics",
+    "nginx",
+    "postgresql::server",
+    "postgresql::server_dev",
+    "your_app::ruby",
+    "your_app::user",
+    "your_app::security",
+    "your_app::rails_app"
+  ]
+}
