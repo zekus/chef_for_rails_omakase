@@ -1,5 +1,9 @@
 # Chef recipes
 
+## IMPORTANT: before you start
+
+Along the code in this repo you'll se references to "your_app". Please, customise it with a proper name everywhere.
+
 ## What it does
 
 Basically, they setup the server completely, from the most basic packages to the configuration of iptables.
@@ -19,6 +23,8 @@ If you just made a change in one of the recipes and you want to update the chang
 ```
 knife solo cook root@host
 ```
+
+**To do that, you'd need, of course, to properly fill in the node config file with the proper settings for your environment.**
 
 ## Gemfile and Berksfile
 
